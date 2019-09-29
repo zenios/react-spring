@@ -184,6 +184,11 @@ export interface AnimationProps<P extends string = string> {
    */
   cancel?: MatchProp<P>
   /**
+   * Pause all animations by using `true`, or some animations by using a key
+   * or an array of keys.
+   */
+  pause?: MatchProp<P>
+  /**
    * Start the next animations at their values in the `from` prop.
    */
   reset?: MatchProp<P>

@@ -19,6 +19,7 @@ export type RunAsyncProps<T = any> = unknown &
     {
       asyncId: number
       cancel: boolean
+      pause: boolean
       reset: boolean
       onAnimate?: (props: RunAsyncProps<T>, spring: SpringValue<T>) => void
     }
@@ -186,7 +187,7 @@ export function scheduleProps<Props extends SpringProps, Result>(
   ) => void
 ): Promise<Result> {
   return new Promise((resolve, reject) => {
-    let { delay, cancel, reset } = props
+    let { delay, cancel, pause, reset } = props
 
     if (is.num(delay) && delay > 0) {
       setTimeout(run, delay)
@@ -203,8 +204,9 @@ export function scheduleProps<Props extends SpringProps, Result>(
         }
       }
       reset = !cancel && matchProp(reset, state.key)
+      pause = !cancel && matchProp(pause, state.key)
       try {
-        action({ ...props, asyncId, cancel, reset }, resolve)
+        action({ ...props, asyncId, cancel, pause, reset }, resolve)
       } catch (err) {
         reject(err)
       }

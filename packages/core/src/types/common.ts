@@ -106,8 +106,9 @@ export interface ReservedProps {
   from?: any
   to?: any
   ref?: any
-  reset?: any
   cancel?: any
+  pause?: any
+  reset?: any
   reverse?: any
   immediate?: any
   default?: any
